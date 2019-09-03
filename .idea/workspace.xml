@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="54576268-5231-40c0-99df-7b90d79a3f11" name="Default Changelist" comment="" />
+    <list default="true" id="54576268-5231-40c0-99df-7b90d79a3f11" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Corey_Roberts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Corey_Roberts.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/GameScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/GameScreen.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
