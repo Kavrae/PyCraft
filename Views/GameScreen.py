@@ -100,23 +100,26 @@ class GameScreen:
 
         pygame.display.flip()
 
-    #TODO either this is backwards, or the tile writing is backwards. Not sure.
+    #TODO left and right now working? Unsure. maybe it's an issue with the tile color instead
+    #TODO stop moving the map when it hits 0/0. Don't go negative when selecting the map coordinate
     #update timing is also weird
     def update_viewer(self):
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
                 self._viewer_position = (numpy.clip(0, self._battlefield_tiles_horizontal, self._viewer_position[0])
-                                         , numpy.clip(0, self._battlefield_tiles_vertical, self._viewer_position[0] + 1))
+                                         , numpy.clip(0, self._battlefield_tiles_vertical, self._viewer_position[1] - 1))
             if event.type == pygame.KEYDOWN and event.key == pygame.K_DOWN:
                 self._viewer_position = (numpy.clip(0, self._battlefield_tiles_horizontal, self._viewer_position[0])
-                                         , numpy.clip(0, self._battlefield_tiles_vertical, self._viewer_position[0] - 1))
+                                         , numpy.clip(0, self._battlefield_tiles_vertical, self._viewer_position[1] + 1))
             if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
                 self._viewer_position = (numpy.clip(0, self._battlefield_tiles_horizontal, self._viewer_position[0] - 1)
-                                         , numpy.clip(0, self._battlefield_tiles_vertical, self._viewer_position[0]))
+                                         , numpy.clip(0, self._battlefield_tiles_vertical, self._viewer_position[1]))
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
                 self._viewer_position = (numpy.clip(0, self._battlefield_tiles_horizontal, self._viewer_position[0] + 1)
-                                         , numpy.clip(0, self._battlefield_tiles_vertical, self._viewer_position[0]))
+                                         , numpy.clip(0, self._battlefield_tiles_vertical, self._viewer_position[1]))
 
+    #TODO if the offset would put it below 0 or above the map size
+    # then change the offset. Clipping the final value will result in repeats
     def update_battlefield(self):
         left_offset = int(self._viewer_position[0] - (self._battlefield_tiles_horizontal / 2))
         top_offset = int(self._viewer_position[1] - (self._battlefield_tiles_vertical / 2))
@@ -125,7 +128,7 @@ class GameScreen:
             for top in range(self._battlefield_tiles_vertical):
                 tile_rect = Rect(left * self._battlefield_tile_size, top * self._battlefield_tile_size,
                                  self._battlefield_tile_size, self._battlefield_tile_size)
-                tile_value = self._entity_map[left + left_offset][top + top_offset]
+                tile_value = self._terrain_map[left + left_offset][top + top_offset]
                 self.write_tile(tile_rect, tile_value)
 
     # TODO change to call write_tile on each object
