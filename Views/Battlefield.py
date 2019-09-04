@@ -1,45 +1,44 @@
 import pygame
 from pygame.locals import *
-import numpy
+from Views.Tile import Tile
 
 
 class Battlefield:
     font = None
     rect = None
     surface = None
+    background_color = None
 
     tile_size = None
+    tiles = None
 
-    #todo change maps to a class
+    # TODO change maps to a class
     # includes arrays of objects
     # includes map size
     # maybe various other helper functions
     terrain_map = None
     terrain_map_size = None
     entity_map = None
-    render_map = None
+    entity_map_size = None
 
     tiles_horizontal = None
     tiles_vertical = None
 
-    cursor_position = None
+    mouse_position = None
 
-    def __init__(self, rect: pygame.Rect = (0, 0, 0, 0), tile_size: int = 10, background_color: tuple = (0, 0, 0)):
+    def __init__(self, rect: pygame.Rect, tile_size: int, terrain_map, entity_map, background_color: tuple):
         self.rect = rect
-        self.surface = pygame.Surface(rect.size)
-        self.surface.fill(background_color)
         self.tile_size = tile_size
+        self.background_color = background_color
 
         self.tiles_horizontal = int(rect.width / self.tile_size)
         self.tiles_vertical = int(rect.height / self.tile_size)
 
-        self.initialize_cursor()
         self.initialize_fonts()
+        self.set_terrain_map(terrain_map)
+        self.set_entity_map(entity_map)
 
-    # Place cursor in the center of the screen
-    # TODO outline cursor
-    def initialize_cursor(self):
-        self.cursor_position = (int(self.tiles_horizontal / 2), int(self.tiles_vertical / 2))
+        self.generate_tiles()
 
     def initialize_fonts(self):
         battlefield_font_name = 'freesansbold.ttf'
@@ -52,78 +51,47 @@ class Battlefield:
 
     def set_entity_map(self, entity_map):
         self.entity_map = entity_map
+        self.entity_map_size = (len(entity_map), len(entity_map[0]))
 
-    # TODO combine maps into a renderable map
-    #  This map would simply replace terrain values with non-null entity values
+    # TODO place all map values into a tile, so it can render whichever it needs
     def update(self):
-        self.update_cursor()
+        self.update_mouse_position()
+        self.update_tiles()
 
-    # TODO Stop moving the map when it hits the boundaries
     def render(self):
-        # Set the starting point for reading the map
-        # Clamp it based on the size of the cursor so that it stops moving past those values
-        left_start = int(self.cursor_position[0] - (self.tiles_horizontal / 2))
-        left_start = sorted((0, left_start, self.terrain_map_size[0] - self.tiles_horizontal))[1]
+        self.surface = pygame.Surface(self.rect.size)
+        self.surface.fill(self.background_color)
 
-        top_start = int(self.cursor_position[1] - (self.tiles_vertical / 2))
-        top_start = sorted((0, top_start, self.terrain_map_size[1] - self.tiles_vertical))[1]
+        self.render_tiles()
 
-        for left in range(left_start, left_start + self.tiles_horizontal):
-            for top in range(top_start, top_start + self.tiles_vertical):
-                tile_position = ((left - left_start) * self.tile_size, (top - top_start) * self.tile_size)
+    # TODO This is a mess. Fix to work properly with new mouse position
+    # TODO scroll map somehow. Maybe when mouse gets to the edge of the battlefield
+    def generate_tiles(self):
+        self.tiles = []
+
+        for left in range(self.tiles_horizontal):
+            row = []
+            for top in range(self.tiles_vertical):
+                tile_position = (left * self.tile_size, top * self.tile_size)
                 tile_rect = Rect(tile_position[0], tile_position[1], self.tile_size, self.tile_size)
-                tile_value = self.terrain_map[top][left]
-                self.write_tile(tile_rect, tile_value)
+                terrain_value = self.terrain_map[top][left]
+                entity_value = self.entity_map[top][left]
+                tile = Tile(tile_rect, terrain_value, entity_value, self.font, self.mouse_position)
+                row.append(tile)
+            self.tiles.append(row)
 
-        self.render_cursor()
+    # TODO update tiles as needed
+    def update_tiles(self):
+        test = 1
 
-    # TODO this eventually needs to be moved to a cursor object embedded or separate from the battlefield
-    # TODO Cursor moves off center as expected when it hits the edge
-    #   BUT it needs to not move at all if the map has moved.
-    #   Need to share state between the two to know when to move the cursor and when not to move it.
-    #   Also need to determine what is under the cursor easily.
-    # TODO might be easier just to do mouse-based movements and click-to-view-data
-    def update_cursor(self):
-        for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
-                self.cursor_position = (
-                    numpy.clip(0, self.tiles_horizontal, self.cursor_position[0])
-                    , numpy.clip(0, self.tiles_vertical, self.cursor_position[1] - 1))
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_DOWN:
-                self.cursor_position = (
-                    numpy.clip(0, self.tiles_horizontal, self.cursor_position[0])
-                    , numpy.clip(0, self.tiles_vertical, self.cursor_position[1] + 1))
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
-                self.cursor_position = (
-                    numpy.clip(0, self.tiles_horizontal, self.cursor_position[0] - 1)
-                    , numpy.clip(0, self.tiles_vertical, self.cursor_position[1]))
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
-                self.cursor_position = (
-                    numpy.clip(0, self.tiles_horizontal, self.cursor_position[0] + 1)
-                    , numpy.clip(0, self.tiles_vertical, self.cursor_position[1]))
+    def render_tiles(self):
+        for tile_row in self.tiles:
+            for tile in tile_row:
+                tile.render()
+                self.surface.blit(tile.surface, tile.rect)
 
-    def render_cursor(self):
-        cursor_color = (255, 0, 0)
-        cursor_rect = Rect(self.cursor_position[0] * self.tile_size, self.cursor_position[1] * self.tile_size, self.tile_size, self.tile_size)
-        width = 1
-        pygame.draw.rect(self.surface, cursor_color, cursor_rect, width)
+    def update_mouse_position(self):
+        self.mouse_position = pygame.mouse.get_pos()
 
-    # TODO change to call write_tile on each object
-    # which then returns a text character and color
-    # to be passed into the common write_tile method
-    def write_tile(self, tile_rect: Rect, text):
-        # Create Tile surface
-        tile_color = (0, 0, 0)
-        tile_surface = pygame.Surface(tile_rect.size)
-        tile_surface.fill(tile_color)
-
-        # Create Font surface
-        antialias = True
-        text_color = (0, 175, 0)
-        font_surface = self.font.render(text, antialias, text_color, tile_color)
-        font_rect = font_surface.get_rect()
-        font_rect.center = (tile_rect.width / 2, tile_rect.height / 2)
-
-        # Add font to tile. Add tile to screen
-        tile_surface.blit(font_surface, font_rect)
-        self.surface.blit(tile_surface, tile_rect)
+    def clip_to_battlefield(self, position):
+        return sorted((0, position[0], self.tiles_horizontal))[1], sorted((0, position[1], self.tiles_vertical))[1]

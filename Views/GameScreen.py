@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import pygame
-import numpy
 from pygame.locals import *
 from Views.Battlefield import Battlefield
 from Views.GameData import GameData
@@ -20,16 +19,22 @@ class GameScreen:
     tileinfo = None
     tileinfo_rect = None
 
+    terrain_map = None
+    entity_map = None
+
     def __init__(self):
         pygame.init()
         pygame.mixer = None  # handles sound
         pygame.display.set_caption('PyCraft')
 
         self.initialize_screen()
+        self.initialize_maps()
         self.initialize_battlefield()
         self.initialize_gamedata()
         self.initialize_tileinfo()
-        self.initialize_maps()
+
+        self.update()
+        self.render()
 
     def initialize_screen(self):
         self.screen_rect = Rect(0, 0, 650, 480)
@@ -43,7 +48,7 @@ class GameScreen:
         rect = Rect(0, 0, int(self.screen_rect.width * 0.65), self.screen_rect.height)
         tile_size = 12
         background_color = (0, 0, 0)
-        self.battlefield = Battlefield(rect, tile_size, background_color)
+        self.battlefield = Battlefield(rect, tile_size, self.terrain_map, self.entity_map, background_color)
 
     def initialize_gamedata(self):
         rect = Rect(int(self.screen_rect.width * 0.65), 0,
@@ -70,25 +75,27 @@ class GameScreen:
                 new_row.append(chr(index))
             temp_map.append(new_row)
 
-        self.battlefield.set_terrain_map(temp_map.copy())
-        self.battlefield.set_entity_map(temp_map.copy())
+        self.terrain_map = temp_map.copy()
+        self.entity_map = temp_map.copy()
 
     def update(self):
         self.battlefield.update()
         self.gamedata.update()
-        # update tileinfo
+        # self.tileinfo.update()
 
     def render(self):
         self.battlefield.render()
         self.gamedata.render()
+        #self.tileinfo.render()
 
-        self.screen.blit(gameScreen.battlefield.surface, self.battlefield.rect.topleft)
-        self.screen.blit(gameScreen.gamedata.surface, self.gamedata.rect.topleft)
-        self.screen.blit(gameScreen.tileinfo, self.tileinfo_rect.topleft)
+        self.screen.blits(((self.battlefield.surface, self.battlefield.rect.topleft),
+                          (self.gamedata.surface, self.gamedata.rect.topleft),
+                          (self.tileinfo, self.tileinfo_rect.topleft)))
 
         pygame.display.flip()
 
 
+# TODO replace with game runner using a speed-limiting clock
 gameScreen = GameScreen()
 while True:
     gameScreen.update()
