@@ -1,29 +1,29 @@
 import pygame
 from pygame.locals import *
-import time
 
 
 # TODO figure out how to get this to pull data from every other view and other places
 class GameData:
+    clock = None
+
     font = None
     rect = None
     surface = None
     background_color = None
 
-    time = None
-    ticks = 0
     fps = None
+    utilization = None
 
-    def __init__(self, rect: Rect = (0, 0, 0, 0), background_color: tuple = (0, 0, 0)):
+    def __init__(self, rect: Rect, clock, background_color: tuple = (0, 0, 0)):
+        self.clock = clock
+
         self.rect = rect
         self.background_color = background_color
         self.surface = pygame.Surface(rect.size)
         self.surface.fill(background_color)
 
-        # fps tracking until it's properly implemented using the clock in the GameScreen and passed in somehow
-        self.time = 0
-        self.ticks = 0
         self.fps = 0
+        self.utilization = 0
 
         self.initialize_fonts()
 
@@ -33,21 +33,14 @@ class GameData:
         self.font = pygame.font.Font(stats_font_name, stats_font_size)
 
     def update(self):
-        self.calculate_fps()
+        self.update_fps()
+        self.update_utilization()
 
     def render(self):
-        self.display_data_rows([self.display_fps()])
+        self.display_data_rows([self.display_fps(),
+                                self.display_utilization()])
 
-    # Only calculate FPS once every second
-    def calculate_fps(self):
-        self.ticks += 1
-
-        current_time = time.time()
-        if current_time - self.time > 1:  # 1 second
-            self.time = current_time
-            self.fps = self.ticks
-            self.ticks = 0
-
+    # TODO left align instead of centered
     def display_data_rows(self, data_surfaces):
         row_num = 0
         background_color = self.background_color
@@ -66,10 +59,30 @@ class GameData:
             self.surface.blit(row_surface, Rect(0, row_num * height, width, height))
             row_num += 1
 
+    def update_fps(self):
+        self.fps = int(self.clock.get_fps())
+
+    def update_utilization(self):
+        total_time = self.clock.get_time()
+        used_time = self.clock.get_rawtime()
+        if total_time > 0:
+            utilization = int(100 * used_time / total_time)
+        else:
+            utilization = 0
+        if abs(self.utilization - utilization) > 0:
+            self.utilization = utilization
+
     # TODO blit multiple text boxes into a single surface to do multiple colors?
     #  good test would be to make the number red if it's below an acceptable value
     def display_fps(self):
         antialias = True
         text_color = (0, 0, 0)
-        text = "FPS = {0:03d}".format(int(self.fps))
+        text = "FPS = {0:03d}".format(self.fps)
         return self.font.render(text, antialias, text_color, self.background_color)
+
+    def display_utilization(self):
+        antialias = True
+        text_color = (0, 0, 0)
+        text = "Frame Utilization = {0:02d}%".format(self.utilization)
+        return self.font.render(text, antialias, text_color, self.background_color)
+

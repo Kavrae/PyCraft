@@ -10,6 +10,9 @@ from Views.GameData import GameData
 # TODO pass in an entity map object instead of instantiating it
 # TODO overlap these maps for the battlefield
 class GameScreen:
+    clock = None
+    fps = None
+
     screen: pygame.Surface = None
     screen_rect: Rect = None
 
@@ -27,14 +30,20 @@ class GameScreen:
         pygame.mixer = None  # handles sound
         pygame.display.set_caption('PyCraft')
 
+        self.initialize_clock()
         self.initialize_screen()
         self.initialize_maps()
         self.initialize_battlefield()
         self.initialize_gamedata()
         self.initialize_tileinfo()
 
+        self.timer()
         self.update()
         self.render()
+
+    def initialize_clock(self):
+        self.clock = pygame.time.Clock()
+        self.fps = 60
 
     def initialize_screen(self):
         self.screen_rect = Rect(0, 0, 650, 480)
@@ -54,7 +63,7 @@ class GameScreen:
         rect = Rect(int(self.screen_rect.width * 0.65), 0,
                     int(self.screen_rect.width * 0.35), int(self.screen_rect.height * 0.5))
         background_color = (200, 200, 200)
-        self.gamedata = GameData(rect, background_color)
+        self.gamedata = GameData(rect, self.clock, background_color)
 
     def initialize_tileinfo(self):
         self.tileinfo_rect = Rect(int(self.screen_rect.width * 0.65), int(self.screen_rect.height * 0.5),
@@ -78,6 +87,9 @@ class GameScreen:
         self.terrain_map = temp_map.copy()
         self.entity_map = temp_map.copy()
 
+    def timer(self):
+        self.clock.tick(self.fps)
+
     def update(self):
         self.battlefield.update()
         self.gamedata.update()
@@ -95,9 +107,10 @@ class GameScreen:
         pygame.display.flip()
 
 
-# TODO replace with game runner using a speed-limiting clock
+# TODO replace with game runner
 gameScreen = GameScreen()
 while True:
+    gameScreen.timer()
     gameScreen.update()
     gameScreen.render()
 pygame.quit

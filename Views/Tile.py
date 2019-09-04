@@ -54,6 +54,7 @@ class Tile:
 
             self.is_changed = False
 
+    # TODO this doesn't work
     def update_selected(self):
         if self.rect.collidepoint(self.mouse_position[0], self.mouse_position[1]):
             print('mouse update event triggered')
