@@ -53,7 +53,6 @@ class Battlefield:
         self.entity_map = entity_map
         self.entity_map_size = (len(entity_map), len(entity_map[0]))
 
-    # TODO place all map values into a tile, so it can render whichever it needs
     def update(self):
         self.update_mouse_position()
         self.update_tiles()
@@ -71,7 +70,6 @@ class Battlefield:
                     return tile
         return None
 
-    # TODO This is a mess. Fix to work properly with new mouse position
     # TODO scroll map somehow. Maybe when mouse gets to the edge of the battlefield
     def generate_tiles(self):
         self.tiles = []

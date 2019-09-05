@@ -3,7 +3,6 @@ from pygame.locals import *
 from Views.Tile import Tile
 
 
-# TODO figure out how to get this to pull data from every other view and other places
 class TileData:
     font = None
     rect = None
