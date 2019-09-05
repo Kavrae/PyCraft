@@ -15,6 +15,7 @@ class Tile:
     mouse_position = None
     background_color = None
 
+    is_first_render = None
     is_selected = None
     is_changed = None
     
@@ -26,6 +27,7 @@ class Tile:
         self.mouse_position = mouse_position
         self.background_color = background_color
 
+        self.is_first_render = True
         self.is_selected = False
         self.is_changed = True
 
@@ -35,9 +37,12 @@ class Tile:
     def update(self):
         self.update_selected()
 
-    # TODO change this to determine which value to use. Maybe overlap. Maybe priority
+    # TODO change this to determine which value to use. entity > terrain > blank
     def render(self):
         if self.is_changed:
+            # Reset Tile
+            self.surface.fill(self.background_color)
+
             # Create Font surface
             antialias = True
             text_color = (0, 175, 0)
@@ -45,25 +50,41 @@ class Tile:
             font_rect = font_surface.get_rect()
             font_rect.center = (self.rect.width / 2, self.rect.height / 2)
 
-            # Add font to tile. Add tile to screen
+            # Add font to tile.
             self.surface.blit(font_surface, font_rect)
 
-            # Add selected box highlight
+            # Add selected box highlight to tile
             if self.is_selected:
                 self.render_selected()
 
-            self.is_changed = False
-
-    # TODO this doesn't work. the collidepoint also seems to take a TON of processing power? or causes it to stick. Maybe don't run in virtual environment
     def update_selected(self):
-        if self.rect[0] == 0 and self.rect[1] == 0:
-            print("Mouse: ({0},{1}) vs Tile: ({2},{3})".format(self.mouse_position[0], self.mouse_position[1], self.rect[0], self.rect[1]))
-        #if self.rect.collidepoint(self.mouse_position[0], self.mouse_position[1]):
-        #    print('mouse update event triggered')
-        #    self.is_selected = True
-        #    self.is_changed = True
+        # Skip all selection logic when first creating the tile
+        if self.is_first_render:
+            self.is_first_render = False
+            return
+
+        if self.mouse_position is not None:
+            if self.rect.collidepoint(self.mouse_position[0], self.mouse_position[1]):
+                # Do not update tile if the mouse was hover over it and still is
+                if self.is_selected:
+                    self.is_selected = True
+                    self.is_changed = False
+                # Update tile if the mouse is hovering over it and wasn't before
+                else:
+                    self.is_selected = True
+                    self.is_changed = True
+            else:
+                # Reset tile if it was previously selected but no longer is
+                if self.is_selected:
+                    self.is_selected = False
+                    self.is_changed = True
+                # Do nothing if the tile wasn't selected and still isn't
+                else:
+                    self.is_changed = False
+                    self.is_selected = False
 
     def render_selected(self):
         width = 1
         selected_color = pygame.Color("red")
-        pygame.draw.rect(self.surface, selected_color, self.rect, width)
+        rect = Rect(0, 0, self.rect.width, self.rect.height)
+        pygame.draw.rect(self.surface, selected_color, rect, width)

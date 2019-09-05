@@ -5,6 +5,7 @@ from pygame.locals import *
 # TODO figure out how to get this to pull data from every other view and other places
 class GameData:
     clock = None
+    ticks = None
 
     font = None
     rect = None
@@ -16,6 +17,7 @@ class GameData:
 
     def __init__(self, rect: Rect, clock, background_color: tuple = (0, 0, 0)):
         self.clock = clock
+        self.ticks = 0
 
         self.rect = rect
         self.background_color = background_color
@@ -33,44 +35,45 @@ class GameData:
         self.font = pygame.font.Font(stats_font_name, stats_font_size)
 
     def update(self):
+        self.ticks += 1
         self.update_fps()
-        self.update_utilization()
+        self.update_utilization(60)
 
     def render(self):
         self.display_data_rows([self.display_fps(),
                                 self.display_utilization()])
 
-    # TODO left align instead of centered
     def display_data_rows(self, data_surfaces):
         row_num = 0
         background_color = self.background_color
+        top_margin = 5
         height = 16
         width = self.rect.width
 
         for data_surface in data_surfaces:
             row_surface = pygame.Surface((width, height))
             row_surface.fill(background_color)
-            row_rect = row_surface.get_rect()
 
             data_rect = data_surface.get_rect()
-            data_rect.center = (row_rect.width / 2, row_rect.height / 2)
             row_surface.blit(data_surface, data_rect)
 
-            self.surface.blit(row_surface, Rect(0, row_num * height, width, height))
+            self.surface.blit(row_surface, Rect(0, row_num * height + top_margin, width, height))
             row_num += 1
 
-    def update_fps(self):
-        self.fps = int(self.clock.get_fps())
+    def update_fps(self, update_rate=0):
+        if update_rate == 0 or self.ticks % update_rate == 0:
+            self.fps = int(self.clock.get_fps())
 
-    def update_utilization(self):
-        total_time = self.clock.get_time()
-        used_time = self.clock.get_rawtime()
-        if total_time > 0:
-            utilization = int(100 * used_time / total_time)
-        else:
-            utilization = 0
-        if abs(self.utilization - utilization) > 0:
-            self.utilization = utilization
+    def update_utilization(self, update_rate=0):
+        if update_rate == 0 or self.ticks % update_rate == 0:
+            total_time = self.clock.get_time()
+            used_time = self.clock.get_rawtime()
+            if total_time > 0:
+                utilization = int(100 * used_time / total_time)
+            else:
+                utilization = 0
+            if abs(self.utilization - utilization) > 0:
+                self.utilization = utilization
 
     # TODO blit multiple text boxes into a single surface to do multiple colors?
     #  good test would be to make the number red if it's below an acceptable value

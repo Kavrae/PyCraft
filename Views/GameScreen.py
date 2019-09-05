@@ -113,4 +113,8 @@ while True:
     gameScreen.timer()
     gameScreen.update()
     gameScreen.render()
+
+    # Hack - prevent windows "not responding" timeouts
+    # TODO move this when I start to handle user events, such as using menus (if any)
+    pygame.event.get()
 pygame.quit

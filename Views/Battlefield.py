@@ -73,16 +73,19 @@ class Battlefield:
             row = []
             for top in range(self.tiles_vertical):
                 tile_position = (left * self.tile_size, top * self.tile_size)
-                tile_rect = Rect(tile_position[0], tile_position[1], self.tile_size, self.tile_size)
-                terrain_value = self.terrain_map[top][left]
-                entity_value = self.entity_map[top][left]
-                tile = Tile(tile_rect, terrain_value, entity_value, self.font, self.mouse_position)
+                tile = Tile(rect=Rect(tile_position[0], tile_position[1], self.tile_size, self.tile_size),
+                            terrain_value=self.terrain_map[top][left],
+                            entity_value=self.entity_map[top][left],
+                            font=self.font,
+                            mouse_position=self.mouse_position)
                 row.append(tile)
             self.tiles.append(row)
 
-    # TODO update tiles as needed
     def update_tiles(self):
-        test = 1
+        for row in self.tiles:
+            for tile in row:
+                tile.mouse_position = self.mouse_position
+                tile.update()
 
     def render_tiles(self):
         for tile_row in self.tiles:
