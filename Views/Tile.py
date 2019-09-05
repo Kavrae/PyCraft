@@ -18,7 +18,8 @@ class Tile:
     is_first_render = None
     is_selected = None
     is_changed = None
-    
+
+    # todo pass in a game piece class (name?) for use in GameData
     def __init__(self, rect: Rect, terrain_value, entity_value, font, mouse_position: tuple, background_color: tuple = pygame.Color("black")):
         self.rect = rect
         self.terrain_value = terrain_value
@@ -46,7 +47,7 @@ class Tile:
             # Create Font surface
             antialias = True
             text_color = (0, 175, 0)
-            font_surface = self.font.render(self.terrain_value, antialias, text_color, self.background_color)
+            font_surface = self.font.render(self.entity_value, antialias, text_color, self.background_color)
             font_rect = font_surface.get_rect()
             font_rect.center = (self.rect.width / 2, self.rect.height / 2)
 

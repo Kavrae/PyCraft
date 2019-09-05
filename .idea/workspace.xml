@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54576268-5231-40c0-99df-7b90d79a3f11" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Pycraft.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Pycraft.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Views/TileData.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/Battlefield.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Battlefield.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/GameData.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/GameData.py" afterDir="false" />

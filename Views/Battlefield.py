@@ -64,6 +64,13 @@ class Battlefield:
 
         self.render_tiles()
 
+    def get_selected_tile(self):
+        for row in self.tiles:
+            for tile in row:
+                if tile.is_selected:
+                    return tile
+        return None
+
     # TODO This is a mess. Fix to work properly with new mouse position
     # TODO scroll map somehow. Maybe when mouse gets to the edge of the battlefield
     def generate_tiles(self):

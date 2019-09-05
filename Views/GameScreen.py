@@ -3,6 +3,7 @@ import pygame
 from pygame.locals import *
 from Views.Battlefield import Battlefield
 from Views.GameData import GameData
+from Views.TileData import TileData
 
 
 # TODO abstract view sizes into GameScreen properties + math to making changing them easier.
@@ -17,10 +18,8 @@ class GameScreen:
     screen_rect: Rect = None
 
     battlefield: Battlefield = None
-    gamedata: GameData = None
-
-    tileinfo = None
-    tileinfo_rect = None
+    game_data: GameData = None
+    tile_data: TileData = None
 
     terrain_map = None
     entity_map = None
@@ -34,8 +33,8 @@ class GameScreen:
         self.initialize_screen()
         self.initialize_maps()
         self.initialize_battlefield()
-        self.initialize_gamedata()
-        self.initialize_tileinfo()
+        self.initialize_game_data()
+        self.initialize_tile_data()
 
         self.timer()
         self.update()
@@ -54,23 +53,23 @@ class GameScreen:
         self.screen.fill((0, 0, 0))
 
     def initialize_battlefield(self):
-        rect = Rect(0, 0, int(self.screen_rect.width * 0.65), self.screen_rect.height)
+        rect = Rect(0, 0, int(self.screen_rect.width * 0.8), self.screen_rect.height)
         tile_size = 12
         background_color = (0, 0, 0)
         self.battlefield = Battlefield(rect, tile_size, self.terrain_map, self.entity_map, background_color)
 
-    def initialize_gamedata(self):
-        rect = Rect(int(self.screen_rect.width * 0.65), 0,
-                    int(self.screen_rect.width * 0.35), int(self.screen_rect.height * 0.5))
-        background_color = (200, 200, 200)
-        self.gamedata = GameData(rect, self.clock, background_color)
+    def initialize_game_data(self):
+        rect = Rect(int(self.screen_rect.width * 0.8), 0,
+                    int(self.screen_rect.width * 0.2), int(self.screen_rect.height * 0.5))
+        background_color = (240, 240, 240)
+        self.game_data = GameData(rect, self.clock, background_color)
 
-    def initialize_tileinfo(self):
-        self.tileinfo_rect = Rect(int(self.screen_rect.width * 0.65), int(self.screen_rect.height * 0.5),
-                                  int(self.screen_rect.width * 0.35), int(self.screen_rect.height * 0.5))
+    def initialize_tile_data(self):
+        rect = Rect(int(self.screen_rect.width * 0.8), int(self.screen_rect.height * 0.5),
+                    int(self.screen_rect.width * 0.2), int(self.screen_rect.height * 0.5))
 
-        self.tileinfo = pygame.Surface(self.tileinfo_rect.size)
-        self.tileinfo.fill((0, 0, 255))
+        background_color = (240, 240, 240)
+        self.tile_data = TileData(rect, background_color)
 
     # TODO this will eventually go away in favor of a map builder to generate default or randomized maps
     def initialize_maps(self):
@@ -92,17 +91,21 @@ class GameScreen:
 
     def update(self):
         self.battlefield.update()
-        self.gamedata.update()
-        # self.tileinfo.update()
+        selected_tile = self.battlefield.get_selected_tile()
+
+        self.game_data.update()
+
+        self.tile_data.set_selected_tile(selected_tile)
+        self.tile_data.update()
 
     def render(self):
         self.battlefield.render()
-        self.gamedata.render()
-        #self.tileinfo.render()
+        self.game_data.render()
+        self.tile_data.render()
 
         self.screen.blits(((self.battlefield.surface, self.battlefield.rect.topleft),
-                          (self.gamedata.surface, self.gamedata.rect.topleft),
-                          (self.tileinfo, self.tileinfo_rect.topleft)))
+                           (self.game_data.surface, self.game_data.rect.topleft),
+                           (self.tile_data.surface, self.tile_data.rect.topleft)))
 
         pygame.display.flip()
 

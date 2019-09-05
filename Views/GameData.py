@@ -30,9 +30,9 @@ class GameData:
         self.initialize_fonts()
 
     def initialize_fonts(self):
-        stats_font_name = 'freesansbold.ttf'
-        stats_font_size = 11
-        self.font = pygame.font.Font(stats_font_name, stats_font_size)
+        font_name = 'helvetica'
+        stats_font_size = 14
+        self.font = pygame.font.SysFont(font_name, stats_font_size)
 
     def update(self):
         self.ticks += 1
@@ -80,7 +80,7 @@ class GameData:
     def display_fps(self):
         antialias = True
         text_color = (0, 0, 0)
-        text = "FPS = {0:03d}".format(self.fps)
+        text = "FPS = {0:02d}".format(self.fps)
         return self.font.render(text, antialias, text_color, self.background_color)
 
     def display_utilization(self):
