@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54576268-5231-40c0-99df-7b90d79a3f11" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/Pycraft.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Pycraft.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Battlefield.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Battlefield.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/GameData.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/GameData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/GameScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/GameScreen.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/Tile.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Tile.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,16 +46,16 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="GameScreen" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="GameScreen" type="PythonConfigurationType" factoryName="Python">
       <module name="Pycraft" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="c:\Users\corey.roberts\AppData\Local\Programs\Python\Python36\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Views" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Views/GameScreen.py" />
@@ -63,11 +67,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.GameScreen" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
