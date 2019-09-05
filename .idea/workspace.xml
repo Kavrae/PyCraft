@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54576268-5231-40c0-99df-7b90d79a3f11" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Pycraft.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Pycraft.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/GameData.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/GameData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/GameScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/GameScreen.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/Tile.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Tile.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

@@ -54,12 +54,14 @@ class Tile:
 
             self.is_changed = False
 
-    # TODO this doesn't work
+    # TODO this doesn't work. the collidepoint also seems to take a TON of processing power? or causes it to stick. Maybe don't run in virtual environment
     def update_selected(self):
-        if self.rect.collidepoint(self.mouse_position[0], self.mouse_position[1]):
-            print('mouse update event triggered')
-            self.is_selected = True
-            self.is_changed = True
+        if self.rect[0] == 0 and self.rect[1] == 0:
+            print("Mouse: ({0},{1}) vs Tile: ({2},{3})".format(self.mouse_position[0], self.mouse_position[1], self.rect[0], self.rect[1]))
+        #if self.rect.collidepoint(self.mouse_position[0], self.mouse_position[1]):
+        #    print('mouse update event triggered')
+        #    self.is_selected = True
+        #    self.is_changed = True
 
     def render_selected(self):
         width = 1
