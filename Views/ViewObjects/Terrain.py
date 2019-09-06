@@ -1,15 +1,14 @@
-class Terrain:
-    name = None
-    value = None
-    status = None
+from Views.ViewObjects.Terrain_Types.Tree import Tree
+from Views.ViewObjects.Terrain_Types.Grass import Grass
 
-    text_color = None
-    background_color = None
 
-    # TODO have terrain and entity inherit from a common interface for Tile to use
-    def __init__(self, name, value, status, text_color, background_color):
-        self.name = name
-        self.value = value
-        self.status = status
-        self.text_color = text_color
-        self.background_color = background_color
+class Terrain(object):
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def get_terrain(name, status, background_color):
+        if name == "Grass":
+            return Grass(status, background_color)
+        elif name == "Tree":
+            return Tree(status, background_color)

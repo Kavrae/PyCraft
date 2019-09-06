@@ -1,18 +1,19 @@
 #!/usr/bin/env python
+# TODO fix imports using proper __init__.py files
+
 import random
 import pygame
 from pygame.locals import *
 from Views.Battlefield import Battlefield
 from Views.GameData import GameData
 from Views.TileData import TileData
-from Views.ViewObjects import *
+from Views.ViewObjects.Terrain import Terrain
+from Views.ViewObjects.Entity import Entity
 
 
 # TODO abstract view sizes into GameScreen properties + math to making changing them easier.
 # TODO pass in a terrain map object instead of instantiating it
 # TODO pass in an entity map object instead of instantiating it
-# TODO overlap these maps for the battlefield
-from Views.ViewObjects.Terrain import Terrain
 
 
 class GameScreen:
@@ -84,9 +85,9 @@ class GameScreen:
             for column in range(100):
                 status = "Alive" if random.randint(0, 1) == 0 else "Burned"
                 if random.randint(0, 100) % 10 == 0:
-                    new_row.append(Terrain('Tree', '$', status, (0, 100, 0), (0, 0, 0)))
+                    new_row.append(Terrain.get_terrain('Tree', status, (0, 0, 0)))
                 else:
-                    new_row.append(Terrain('Grass', '.', status, (0, 200, 0), (0, 0, 0)))
+                    new_row.append(Terrain.get_terrain('Grass', status, (0, 0, 0)))
             self.terrain_map.append(new_row)
 
         self.entity_map = []
@@ -95,9 +96,9 @@ class GameScreen:
             for column in range(100):
                 status = "Alive" if random.randint(0, 1) == 0 else "Dead"
                 if random.randint(0, 100) < 2:
-                    new_row.append(Terrain('Orc', '%', status, (255, 0, 0), (0, 0, 0)))
+                    new_row.append(Entity.get_entity('Orc', status, (0, 0, 0)))
                 elif random.randint(0, 100) < 4:
-                    new_row.append(Terrain('Human', '@', status, (0, 0, 255), (0, 0, 0)))
+                    new_row.append(Entity.get_entity('Human', status, (0, 0, 0)))
                 else:
                     new_row.append(None)
             self.entity_map.append(new_row)

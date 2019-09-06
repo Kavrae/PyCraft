@@ -25,9 +25,8 @@ class TileData:
         self.font = pygame.font.SysFont(font_name, stats_font_size)
 
     def update(self):
-        test = 1
+        pass
 
-    # TODO replace with information from the entity and terrain game objects inside the tile instead of the tile itself
     def render(self):
         self.display_data_rows([self.display_tile_name(),
                                 self.display_tile_status()])
@@ -56,19 +55,19 @@ class TileData:
         text_color = (0, 0, 0)
         if self.selected_tile is None:
             text = "No Tiles Selected"
-        elif self.selected_tile.entity is None:
-            text = self.selected_tile.terrain.name
-        else:
+        elif self.selected_tile.entity is not None:
             text = self.selected_tile.entity.name
+        else:
+            text = self.selected_tile.terrain.name
         return self.font.render(text, antialias, text_color, self.background_color)
 
     def display_tile_status(self):
         antialias = True
         text_color = (0, 0, 0)
         if self.selected_tile is None:
-            text = " "
-        elif self.selected_tile.entity is None:
-            text = self.selected_tile.terrain.status
-        else:
+            text = ""
+        elif self.selected_tile.entity is not None:
             text = self.selected_tile.entity.status
+        else:
+            text = self.selected_tile.terrain.status
         return self.font.render(text, antialias, text_color, self.background_color)

@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 from Views.ViewObjects.Entity import *
-from Views.ViewObjects.Terrain import *
+from Views.ViewObjects.Terrain_Types import *
 
 
 class Tile:
@@ -11,8 +11,8 @@ class Tile:
     font = None
 
     # TODO change these to objects as well
-    terrain: Terrain = None
-    entity: Entity = None
+    terrain = None
+    entity = None
     
     mouse_position = None
     background_color = None
@@ -40,7 +40,6 @@ class Tile:
     def update(self):
         self.update_selected()
 
-    # TODO change this to determine which value to use. entity > terrain > blank
     def render(self):
         if self.is_changed:
             # Reset Tile
@@ -48,10 +47,7 @@ class Tile:
 
             # Create Font surface
             antialias = True
-            if self.entity is None:
-                printable = self.terrain
-            else:
-                printable = self.entity
+            printable = self.entity or self.terrain
             font_surface = self.font.render(printable.value, antialias, printable.text_color, printable.background_color)
             font_rect = font_surface.get_rect()
             font_rect.center = (self.rect.width / 2, self.rect.height / 2)
