@@ -1,15 +1,20 @@
 #!/usr/bin/env python
+import random
 import pygame
 from pygame.locals import *
 from Views.Battlefield import Battlefield
 from Views.GameData import GameData
 from Views.TileData import TileData
+from Views.ViewObjects import *
 
 
 # TODO abstract view sizes into GameScreen properties + math to making changing them easier.
 # TODO pass in a terrain map object instead of instantiating it
 # TODO pass in an entity map object instead of instantiating it
 # TODO overlap these maps for the battlefield
+from Views.ViewObjects.Terrain import Terrain
+
+
 class GameScreen:
     clock = None
     fps = None
@@ -73,18 +78,29 @@ class GameScreen:
 
     # TODO this will eventually go away in favor of a map builder to generate default or randomized maps
     def initialize_maps(self):
-        temp_map = []
+        self.terrain_map = []
         for row in range(100):
             new_row = []
-            for column in range(30, 126):
-                index = row + column
-                while index > 126:
-                    index -= 96
-                new_row.append(chr(index))
-            temp_map.append(new_row)
+            for column in range(100):
+                status = "Alive" if random.randint(0, 1) == 0 else "Burned"
+                if random.randint(0, 100) % 10 == 0:
+                    new_row.append(Terrain('Tree', '$', status, (0, 100, 0), (0, 0, 0)))
+                else:
+                    new_row.append(Terrain('Grass', '.', status, (0, 200, 0), (0, 0, 0)))
+            self.terrain_map.append(new_row)
 
-        self.terrain_map = temp_map.copy()
-        self.entity_map = temp_map.copy()
+        self.entity_map = []
+        for row in range(100):
+            new_row = []
+            for column in range(100):
+                status = "Alive" if random.randint(0, 1) == 0 else "Dead"
+                if random.randint(0, 100) < 2:
+                    new_row.append(Terrain('Orc', '%', status, (255, 0, 0), (0, 0, 0)))
+                elif random.randint(0, 100) < 4:
+                    new_row.append(Terrain('Human', '@', status, (0, 0, 255), (0, 0, 0)))
+                else:
+                    new_row.append(None)
+            self.entity_map.append(new_row)
 
     def timer(self):
         self.clock.tick(self.fps)

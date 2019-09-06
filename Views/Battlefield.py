@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from Views.Tile import Tile
+from Views.ViewObjects.Tile import Tile
 
 
 class Battlefield:
@@ -79,8 +79,8 @@ class Battlefield:
             for top in range(self.tiles_vertical):
                 tile_position = (left * self.tile_size, top * self.tile_size)
                 tile = Tile(rect=Rect(tile_position[0], tile_position[1], self.tile_size, self.tile_size),
-                            terrain_value=self.terrain_map[top][left],
-                            entity_value=self.entity_map[top][left],
+                            terrain=self.terrain_map[top][left],
+                            entity=self.entity_map[top][left],
                             font=self.font,
                             mouse_position=self.mouse_position)
                 row.append(tile)

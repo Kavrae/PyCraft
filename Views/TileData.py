@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from Views.Tile import Tile
+from Views.ViewObjects.Tile import Tile
 
 
 class TileData:
@@ -29,7 +29,8 @@ class TileData:
 
     # TODO replace with information from the entity and terrain game objects inside the tile instead of the tile itself
     def render(self):
-        self.display_data_rows([self.display_tile_name()])
+        self.display_data_rows([self.display_tile_name(),
+                                self.display_tile_status()])
 
     def set_selected_tile(self, tile):
         self.selected_tile = tile
@@ -53,5 +54,21 @@ class TileData:
     def display_tile_name(self):
         antialias = True
         text_color = (0, 0, 0)
-        text = "No Tiles Selected" if self.selected_tile is None else self.selected_tile.entity_value
+        if self.selected_tile is None:
+            text = "No Tiles Selected"
+        elif self.selected_tile.entity is None:
+            text = self.selected_tile.terrain.name
+        else:
+            text = self.selected_tile.entity.name
+        return self.font.render(text, antialias, text_color, self.background_color)
+
+    def display_tile_status(self):
+        antialias = True
+        text_color = (0, 0, 0)
+        if self.selected_tile is None:
+            text = " "
+        elif self.selected_tile.entity is None:
+            text = self.selected_tile.terrain.status
+        else:
+            text = self.selected_tile.entity.status
         return self.font.render(text, antialias, text_color, self.background_color)

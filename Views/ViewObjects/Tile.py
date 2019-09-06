@@ -1,5 +1,7 @@
 import pygame
 from pygame.locals import *
+from Views.ViewObjects.Entity import *
+from Views.ViewObjects.Terrain import *
 
 
 class Tile:
@@ -9,8 +11,8 @@ class Tile:
     font = None
 
     # TODO change these to objects as well
-    terrain_value = None
-    entity_value = None
+    terrain: Terrain = None
+    entity: Entity = None
     
     mouse_position = None
     background_color = None
@@ -20,10 +22,10 @@ class Tile:
     is_changed = None
 
     # todo pass in a game piece class (name?) for use in GameData
-    def __init__(self, rect: Rect, terrain_value, entity_value, font, mouse_position: tuple, background_color: tuple = pygame.Color("black")):
+    def __init__(self, rect: Rect, terrain, entity, font, mouse_position: tuple, background_color: tuple = pygame.Color("black")):
         self.rect = rect
-        self.terrain_value = terrain_value
-        self.entity_value = entity_value
+        self.terrain = terrain
+        self.entity = entity
         self.font = font
         self.mouse_position = mouse_position
         self.background_color = background_color
@@ -46,8 +48,11 @@ class Tile:
 
             # Create Font surface
             antialias = True
-            text_color = (0, 175, 0)
-            font_surface = self.font.render(self.entity_value, antialias, text_color, self.background_color)
+            if self.entity is None:
+                printable = self.terrain
+            else:
+                printable = self.entity
+            font_surface = self.font.render(printable.value, antialias, printable.text_color, printable.background_color)
             font_rect = font_surface.get_rect()
             font_rect.center = (self.rect.width / 2, self.rect.height / 2)
 
