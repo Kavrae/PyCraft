@@ -1,5 +1,5 @@
-from Views.ViewObjects.Terrain_Types.Tree import Tree
 from Views.ViewObjects.Terrain_Types.Grass import Grass
+from Views.ViewObjects.Terrain_Types.Tree import Tree
 
 
 class Terrain(object):

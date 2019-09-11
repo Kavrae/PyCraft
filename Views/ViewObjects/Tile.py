@@ -1,7 +1,5 @@
 import pygame
 from pygame.locals import *
-from Views.ViewObjects.Entity import *
-from Views.ViewObjects.Terrain_Types import *
 
 
 class Tile:
