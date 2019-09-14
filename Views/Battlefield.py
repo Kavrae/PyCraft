@@ -25,16 +25,31 @@ class Battlefield:
     tiles_vertical = None
 
     mouse_position = None
+    max_scroll_cooldown = None
+    current_scroll_cooldown = None
+
+    rewrite_all_tiles = None
+    map_offset_horizontal = None
+    map_offset_vertical = None
 
     def __init__(self, rect: pygame.Rect, tile_size: int, terrain_map, entity_map, background_color: tuple):
         self.rect = rect
-        self.tile_size = tile_size
-        self.background_color = background_color
+        self.tile_size = tile_size  # Square tiles
+        self.background_color = background_color  # This is applied to all screens and tiles to speed up blits
 
-        self.tiles_horizontal = int(rect.width / self.tile_size)
+        self.tiles_horizontal = int(rect.width / self.tile_size)  # int conversion forces round down
         self.tiles_vertical = int(rect.height / self.tile_size)
 
+        self.map_offset_horizontal = 0  # Determines which map coordinates to print to the battlefield
+        self.map_offset_vertical = 0
+
+        self.rewrite_all_tiles = False  # Force expensive rebuild of all tiles
+
+        self.max_scroll_cooldown = 0  # Use this to slow down scrolling if needed
+        self.current_scroll_cooldown = 0
+
         self.initialize_fonts()
+
         self.set_terrain_map(terrain_map)
         self.set_entity_map(entity_map)
 
@@ -55,6 +70,7 @@ class Battlefield:
 
     def update(self):
         self.update_mouse_position()
+        self.update_map_scroll()
         self.update_tiles()
 
     def render(self):
@@ -70,7 +86,6 @@ class Battlefield:
                     return tile
         return None
 
-    # TODO scroll map somehow. Maybe when mouse gets to the edge of the battlefield
     def generate_tiles(self):
         self.tiles = []
 
@@ -78,19 +93,26 @@ class Battlefield:
             row = []
             for top in range(self.tiles_vertical):
                 tile_position = (left * self.tile_size, top * self.tile_size)
+                tile_x = self.map_offset_horizontal + left
+                tile_y = self.map_offset_vertical + top
+
                 tile = Tile(rect=Rect(tile_position[0], tile_position[1], self.tile_size, self.tile_size),
-                            terrain=self.terrain_map[top][left],
-                            entity=self.entity_map[top][left],
+                            terrain=self.terrain_map[tile_x][tile_y],
+                            entity=self.entity_map[tile_x][tile_y],
                             font=self.font,
                             mouse_position=self.mouse_position)
                 row.append(tile)
             self.tiles.append(row)
 
     def update_tiles(self):
-        for row in self.tiles:
-            for tile in row:
-                tile.mouse_position = self.mouse_position
-                tile.update()
+        if self.rewrite_all_tiles:
+            self.generate_tiles()
+            self.rewrite_all_tiles = False
+        else:
+            for row in self.tiles:
+                for tile in row:
+                    tile.mouse_position = self.mouse_position
+                    tile.update()
 
     def render_tiles(self):
         for tile_row in self.tiles:
@@ -100,6 +122,43 @@ class Battlefield:
 
     def update_mouse_position(self):
         self.mouse_position = pygame.mouse.get_pos()
+
+    # TODO change all of this if we start in the center of the map OR centered on a chosen player
+    def update_map_scroll(self):
+        if self.current_scroll_cooldown > 0:
+            self.current_scroll_cooldown -= 1
+        else:
+            # Scroll left (leftmost tile but not off the map)
+            if self.rect.left <= self.mouse_position[0] <= self.tile_size:
+                # Don't decrement if it would shift off the left of the map
+                if self.map_offset_horizontal > 0:
+                    self.map_offset_horizontal -= 1
+                    self.rewrite_all_tiles = True
+                    self.current_scroll_cooldown = self.max_scroll_cooldown
+
+            # Scroll Right (rightmost tile, but not off the map)
+            elif (self.tiles_horizontal - 1) * self.tile_size <= self.mouse_position[0] <= self.rect.right:
+                # Don't increment if it would shift off the right of the map
+                if self.map_offset_horizontal < self.terrain_map_size[0] - self.tiles_horizontal:
+                    self.map_offset_horizontal += 1
+                    self.rewrite_all_tiles = True
+                    self.current_scroll_cooldown = self.max_scroll_cooldown
+
+            # Scroll Up (topmost tile but not off the map)
+            if self.rect.top <= self.mouse_position[1] <= self.tile_size:
+                # Don't decrement if it would shift off the top of the map
+                if self.map_offset_vertical > 0:
+                    self.map_offset_vertical -= 1
+                    self.rewrite_all_tiles = True
+                    self.current_scroll_cooldown = self.max_scroll_cooldown
+
+            # Scroll Down (bottommost tile, but not off the map)
+            elif (self.tiles_vertical - 1) * self.tile_size <= self.mouse_position[1] <= self.rect.bottom:
+                # Don't increment if it would shift off the bottom of the map
+                if self.map_offset_vertical < self.terrain_map_size[1] - self.tiles_vertical:
+                    self.map_offset_vertical += 1
+                    self.rewrite_all_tiles = True
+                    self.current_scroll_cooldown = self.max_scroll_cooldown
 
     def clip_to_battlefield(self, position):
         return sorted((0, position[0], self.tiles_horizontal))[1], sorted((0, position[1], self.tiles_vertical))[1]

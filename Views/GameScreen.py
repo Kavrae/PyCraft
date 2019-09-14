@@ -25,7 +25,7 @@ class GameScreen:
         self.render()
 
     def initialize_screen(self):
-        self._screen_rect = Rect(0, 0, 650, 480)
+        self._screen_rect = Rect(0, 0, 960, 720)
         window_style = 0
 
         best_depth = pygame.display.mode_ok(self._screen_rect.size, window_style, 32)

@@ -2,6 +2,8 @@
   <dictionary name="Corey Roberts">
     <words>
       <w>antialias</w>
+      <w>blits</w>
+      <w>cooldown</w>
       <w>freesansbold</w>
       <w>gamedata</w>
       <w>pygame</w>

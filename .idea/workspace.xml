@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54576268-5231-40c0-99df-7b90d79a3f11" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/GameRunner/GameRunner.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GameRunner/MapFactory.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GameRunner/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Pycraft.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Pycraft.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Corey_Roberts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Corey_Roberts.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Battlefield.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Battlefield.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/GameScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/GameScreen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/TileData.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/TileData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/Terrain.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ViewObjects/Terrain.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/Tile.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ViewObjects/Tile.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
