@@ -8,7 +8,6 @@ class Tile:
 
     font = None
 
-    # TODO change these to objects as well
     terrain = None
     entity = None
     
@@ -19,7 +18,6 @@ class Tile:
     is_selected = None
     is_changed = None
 
-    # todo pass in a game piece class (name?) for use in GameData
     def __init__(self, rect: Rect, terrain, entity, font, mouse_position: tuple, background_color: tuple = pygame.Color("black")):
         self.rect = rect
         self.terrain = terrain

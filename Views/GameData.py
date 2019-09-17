@@ -2,7 +2,6 @@ import pygame
 from pygame.locals import *
 
 
-# TODO figure out how to get this to pull data from every other view and other places
 class GameData:
     clock = None
     ticks = None
@@ -75,8 +74,6 @@ class GameData:
             if abs(self.utilization - utilization) > 0:
                 self.utilization = utilization
 
-    # TODO blit multiple text boxes into a single surface to do multiple colors?
-    #  good test would be to make the number red if it's below an acceptable value
     def display_fps(self):
         antialias = True
         text_color = (0, 0, 0)
