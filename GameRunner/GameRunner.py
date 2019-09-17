@@ -20,8 +20,6 @@ class GameRunner:
     _clock = None
     _fps = None
 
-    _bots = None
-
     def __init__(self):
         pygame.init()
         pygame.mixer = None  # handles sound
@@ -37,8 +35,8 @@ class GameRunner:
 
     def run(self):
         # TODO got input parsing
-        for bot in self._bots:
-            bot.run()
+        for bot_data in self._gameState._bots:
+            bot_data._bot.run()
         # TODO game engine's "turn" (resource growth, wild animals, natural events, etc)
         self.clock_tick()
         self._gameScreen.update()
@@ -63,9 +61,7 @@ class GameRunner:
 
     # todo parse bots and bot_wrappers
     def initialize_bots(self):
-        self._bots = []
         bot = ExampleBot(self._gameLibrary)
-        self._bots.append(bot)  # TODO seems redundant. Any way to synchronize this with game_state bots? Or should it be separate?
         self._gameState.add_bot(bot)
 
     def clock_tick(self):

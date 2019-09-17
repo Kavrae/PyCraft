@@ -1,15 +1,12 @@
-from GameLibrary.ExampleLibrary import ExampleLibrary
+from .BotTemplate import BotTemplate
 
 
-# TODO way for a bot to figure out its mana and other properties from the BotData. Maybe a call to the library with id?
-class ExampleBot:
-    _game_library = None
-
+class ExampleBot(BotTemplate):
     _i = 10
-
-    def __init__(self, game_library):
-        self._game_library = game_library  # TODO move this to super_class init instead. Just make them inherit from a parent bot
+    # TODO how to set things like race? That determines which units can be used. Register method?
 
     def run(self):
-        self._game_library.summon(id(self), 5, (0, self._i))
-        self._i += 1
+        mana = self._game_library.get_mana(id(self))  # TODO redo this with change to object in bot_data.How?
+        if mana > 0:
+            self._game_library.summon(id(self), 5, (0, self._i))
+            self._i -= 1
