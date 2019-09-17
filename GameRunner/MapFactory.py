@@ -3,6 +3,8 @@ from Views.ViewObjects import TerrainFactory
 from Views.ViewObjects import EntityFactory
 
 
+# TODO put this into the GameLibrary instead
+# make the GameRunner worry about seed values, pulling in bots, and transforming things for the view layer
 class MapFactory:
     def generate_example_map(self):
         terrain_map = []

@@ -3,17 +3,24 @@ import pygame
 
 from Views import GameScreen
 from MapFactory import MapFactory  # Why is this angry? Confused. Doesn't work with .MapFactory like everything else
+from GameState.GameState import GameState
+from GameLibrary.ExampleLibrary import ExampleLibrary
+from Bots.ExampleBot import ExampleBot  #  TODO figure out how to dynamically import all bots at runtime (do int _init__.py)
 
 
 # TODO register bots
 # TODO generate map based on user or random selection
 # TODO game engine instantiation
 class GameRunner:
+    _gameState = None
     _mapFactory = None
     _gameScreen = None
+    _gameLibrary = None
 
     _clock = None
     _fps = None
+
+    _bots = None
 
     def __init__(self):
         pygame.init()
@@ -21,19 +28,18 @@ class GameRunner:
         pygame.display.set_caption('PyCraft')
 
         self.initialize_clock()
+        self.initialize_map_factory()
+        self.initialize_game_state()
+        self._gameLibrary = ExampleLibrary(self._gameState)  # TODO proper library initialization
+        self.initialize_bots()
 
-        self._mapFactory = MapFactory()
-        default_terrain_map = self._mapFactory.generate_example_map()
-        default_entity_map = self._mapFactory.generate_example_entities()
-
-        self._gameScreen = GameScreen(self._clock,
-                                      default_terrain_map,
-                                      default_entity_map)
+        self._gameScreen = GameScreen(self._clock, self._gameState)
 
     def run(self):
         # TODO got input parsing
-        # TODO game engine run bot input
-        # TODO game engine's "turn"
+        for bot in self._bots:
+            bot.run()
+        # TODO game engine's "turn" (resource growth, wild animals, natural events, etc)
         self.clock_tick()
         self._gameScreen.update()
         self._gameScreen.render()
@@ -45,6 +51,22 @@ class GameRunner:
     def initialize_clock(self):
         self._clock = pygame.time.Clock()
         self._fps = 60
+
+    # TODO map seeds
+    def initialize_map_factory(self):
+        self._mapFactory = MapFactory()
+
+    def initialize_game_state(self):
+        self._gameState = GameState()
+
+        self._gameState.set_terrain_map(self._mapFactory.generate_example_map())
+
+    # todo parse bots and bot_wrappers
+    def initialize_bots(self):
+        self._bots = []
+        bot = ExampleBot(self._gameLibrary)
+        self._bots.append(bot)  # TODO seems redundant. Any way to synchronize this with game_state bots? Or should it be separate?
+        self._gameState.add_bot(bot)
 
     def clock_tick(self):
         self._clock.tick(self._fps)

@@ -3,6 +3,7 @@ from pygame.locals import *
 from .Battlefield import Battlefield
 from .GameData import GameData
 from .TileData import TileData
+from GameState import GameState
 
 
 # TODO abstract view sizes into GameScreen properties + math to making changing them easier.
@@ -10,13 +11,16 @@ class GameScreen:
     _screen: pygame.Surface = None
     _screen_rect: Rect = None
 
+    _game_state: GameState = None
+
     _battlefield: Battlefield = None
     _game_data: GameData = None
     _tile_data: TileData = None
 
-    def __init__(self, clock, terrain_map, entity_map):
+    def __init__(self, clock, game_state):
+        self._game_state = game_state
         self.initialize_screen()
-        self.initialize_battlefield(terrain_map, entity_map)
+        self.initialize_battlefield()
         self.initialize_game_data(clock)
         self.initialize_tile_data()
 
@@ -31,10 +35,13 @@ class GameScreen:
         self._screen = pygame.display.set_mode(self._screen_rect.size, window_style, best_depth)
         self._screen.fill((0, 0, 0))
 
-    def initialize_battlefield(self, terrain_map, entity_map):
+    # TODO initialize battlefield with game_state terrain, and then combine all of the game_state bot entities into a map for entity_map
+    def initialize_battlefield(self):
         rect = Rect(0, 0, int(self._screen_rect.width * 0.8), self._screen_rect.height)
         tile_size = 12
         background_color = (0, 0, 0)
+        terrain_map = self._game_state._terrain_map
+        entity_map = terrain_map
         self._battlefield = Battlefield(rect, tile_size, terrain_map, entity_map, background_color)
 
     def initialize_game_data(self, clock):
