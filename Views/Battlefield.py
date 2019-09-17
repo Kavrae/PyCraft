@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from Views.ViewObjects.Tile import Tile
+from Views.ViewObjects import Tile
 
 
 class Battlefield:

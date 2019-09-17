@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import pygame
 
-from MapFactory import MapFactory
-from Views.GameScreen import GameScreen
+from Views import GameScreen
+from MapFactory import MapFactory  # Why is this angry? Confused. Doesn't work with .MapFactory like everything else
 
 
 # TODO register bots

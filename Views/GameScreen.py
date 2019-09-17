@@ -1,9 +1,8 @@
 import pygame
 from pygame.locals import *
-
-from Views.Battlefield import Battlefield
-from Views.GameData import GameData
-from Views.TileData import TileData
+from .Battlefield import Battlefield
+from .GameData import GameData
+from .TileData import TileData
 
 
 # TODO abstract view sizes into GameScreen properties + math to making changing them easier.

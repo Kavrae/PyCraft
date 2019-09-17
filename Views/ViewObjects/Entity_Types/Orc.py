@@ -1,23 +1,13 @@
 import pygame
+from .Entity import Entity
 
 
-class Orc:
-    name = None
-    value = None
-    status = None
-
-    text_color = None
-    background_color = None
-
+class Orc(Entity):
     def __init__(self, status, background_color):
-        self.name = 'Orc'
-        self.value = '%'
-        self.status = status
-        self.text_color = self.set_text_color()
-        self.background_color = background_color
+        super().__init__("Orc", "O", status, self.generate_text_color(status), background_color)
 
-    def set_text_color(self):
-        if self.status == 'Alive':
+    def generate_text_color(self, status):
+        if status == 'Alive':
             return pygame.Color('red')
-        elif self.status == 'Dead':
+        elif status == 'Dead':
             return pygame.Color('white')

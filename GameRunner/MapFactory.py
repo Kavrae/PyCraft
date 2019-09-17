@@ -1,7 +1,6 @@
 import random
-
-from Views.ViewObjects.Entity import Entity
-from Views.ViewObjects.Terrain import Terrain
+from Views.ViewObjects import TerrainFactory
+from Views.ViewObjects import EntityFactory
 
 
 class MapFactory:
@@ -12,9 +11,9 @@ class MapFactory:
             for column in range(100):
                 status = "Alive" if random.randint(0, 1) == 0 else "Burned"
                 if random.randint(0, 100) % 10 == 0:
-                    new_row.append(Terrain.get_terrain('Tree', status, (0, 0, 0)))
+                    new_row.append(TerrainFactory.create_terrain('Tree', status, (0, 0, 0)))
                 else:
-                    new_row.append(Terrain.get_terrain('Grass', status, (0, 0, 0)))
+                    new_row.append(TerrainFactory.create_terrain('Grass', status, (0, 0, 0)))
             terrain_map.append(new_row)
         return terrain_map
 
@@ -25,9 +24,9 @@ class MapFactory:
             for column in range(100):
                 status = "Alive" if random.randint(0, 1) == 0 else "Dead"
                 if random.randint(0, 100) < 2:
-                    new_row.append(Entity.get_entity('Orc', status, (0, 0, 0)))
+                    new_row.append(EntityFactory.create_entity('Orc', status, (0, 0, 0)))
                 elif random.randint(0, 100) < 4:
-                    new_row.append(Entity.get_entity('Human', status, (0, 0, 0)))
+                    new_row.append(EntityFactory.create_entity('Human', status, (0, 0, 0)))
                 else:
                     new_row.append(None)
             entity_map.append(new_row)

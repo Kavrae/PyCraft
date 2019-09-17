@@ -46,7 +46,8 @@ class Tile:
             # Create Font surface
             antialias = True
             printable = self.entity or self.terrain
-            font_surface = self.font.render(printable.value, antialias, printable.text_color, printable.background_color)
+            font_surface = self.font.render(printable.get_value(), antialias,
+                                            printable.get_text_color(), printable.get_background_color())
             font_rect = font_surface.get_rect()
             font_rect.center = (self.rect.width / 2, self.rect.height / 2)
 
