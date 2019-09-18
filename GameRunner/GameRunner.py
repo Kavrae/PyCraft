@@ -61,8 +61,10 @@ class GameRunner:
 
     # todo parse bots and bot_wrappers
     def initialize_bots(self):
-        bot = ExampleBot(self._gameLibrary)
-        self._gameState.add_bot(bot)
+        # TODO increment each bot id by 1
+        # TODO pull by indexer. More efficient than artificial id
+        self._gameState.add_bot(ExampleBot(0, self._gameLibrary))
+        self._gameState.add_bot(ExampleBot(1, self._gameLibrary))
 
     def clock_tick(self):
         self._clock.tick(self._fps)

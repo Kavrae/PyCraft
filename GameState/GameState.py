@@ -14,9 +14,7 @@ class GameState:
     def add_bot(self, bot):
         self._bots.append(BotData(bot))
 
-    # TODO use a proper filter. Does this work on id? is it slow?
     def get_bot_data(self, bot_id):
-        for bot_data in self._bots:
-            if id(bot_data._bot) == bot_id:
-                return bot_data
+        if len(self._bots) > bot_id:
+            return self._bots[bot_id]
         return None
