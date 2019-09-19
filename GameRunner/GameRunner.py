@@ -5,7 +5,7 @@ from Views import GameScreen
 from MapFactory import MapFactory  # Why is this angry? Confused. Doesn't work with .MapFactory like everything else
 from GameState.GameState import GameState
 from GameLibrary.ExampleLibrary import ExampleLibrary
-from Bots.ExampleBot import ExampleBot  #  TODO figure out how to dynamically import all bots at runtime (do int _init__.py)
+from Bots.ExampleBot import ExampleBot  #  TODO figure out how to dynamically import all bots at runtime (do in _init__.py)
 
 
 # TODO register bots
@@ -35,8 +35,8 @@ class GameRunner:
 
     def run(self):
         # TODO got input parsing
-        for bot_data in self._gameState._bots:
-            bot_data._bot.run()
+        for bot_data in self._gameState.bots:
+            bot_data.bot.run()
         # TODO game engine's "turn" (resource growth, wild animals, natural events, etc)
         self.clock_tick()
         self._gameScreen.update()
@@ -56,13 +56,10 @@ class GameRunner:
 
     def initialize_game_state(self):
         self._gameState = GameState()
-
-        self._gameState.set_terrain_map(self._mapFactory.generate_example_map())
+        self._gameState.terrain_map = self._mapFactory.generate_example_map()
 
     # todo parse bots and bot_wrappers
     def initialize_bots(self):
-        # TODO increment each bot id by 1
-        # TODO pull by indexer. More efficient than artificial id
         self._gameState.add_bot(ExampleBot(0, self._gameLibrary))
         self._gameState.add_bot(ExampleBot(1, self._gameLibrary))
 
@@ -75,3 +72,5 @@ gameRunner = GameRunner()
 while True:
     gameRunner.run()
 pygame.quit
+
+# TODO pause option (don't run while paused)

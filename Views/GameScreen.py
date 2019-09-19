@@ -28,7 +28,7 @@ class GameScreen:
         self.render()
 
     def initialize_screen(self):
-        self._screen_rect = Rect(0, 0, 960, 720)
+        self._screen_rect = Rect(0, 0, 960, 680)
         window_style = 0
 
         best_depth = pygame.display.mode_ok(self._screen_rect.size, window_style, 32)
@@ -41,7 +41,7 @@ class GameScreen:
         tile_size = 12
         background_color = (0, 0, 0)
         terrain_map = self._game_state._terrain_map
-        entity_map = terrain_map
+        entity_map = self._game_state.generate_view_entity_map()
         self._battlefield = Battlefield(rect, tile_size, terrain_map, entity_map, background_color)
 
     def initialize_game_data(self, clock):
@@ -62,7 +62,7 @@ class GameScreen:
         self._battlefield.entity_map = entity_map
 
     def update(self):
-        self._battlefield.update()
+        self._battlefield.update(self._game_state)
         selected_tile = self._battlefield.get_selected_tile()
 
         self._game_data.update()

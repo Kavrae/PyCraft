@@ -1,5 +1,6 @@
 import pygame
 from pygame.locals import *
+
 from Views.ViewObjects import Tile
 
 
@@ -68,7 +69,8 @@ class Battlefield:
         self.entity_map = entity_map
         self.entity_map_size = (len(entity_map), len(entity_map[0]))
 
-    def update(self):
+    def update(self, game_state):
+        self.update_entity_map(game_state)
         self.update_mouse_position()
         self.update_map_scroll()
         self.update_tiles()
@@ -103,6 +105,9 @@ class Battlefield:
                             mouse_position=self.mouse_position)
                 row.append(tile)
             self.tiles.append(row)
+
+    def update_entity_map(self, game_state):
+        self.entity_map = game_state.generate_view_entity_map()
 
     def update_tiles(self):
         if self.rewrite_all_tiles:

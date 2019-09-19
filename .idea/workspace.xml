@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="54576268-5231-40c0-99df-7b90d79a3f11" name="Default Changelist" comment="" />
+    <list default="true" id="54576268-5231-40c0-99df-7b90d79a3f11" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Entities/Entity.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Entities/EntityFactory.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Entities/Human/Human.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Entities/Human/HumanWarrior.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Entities/Human/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Entities/Orc/Orc.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Entities/Orc/OrcWarrior.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Entities/Orc/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Entities/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Terrain/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bots/BotTemplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bots/BotTemplate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bots/ExampleBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bots/ExampleBot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameLibrary/ExampleLibrary.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/ExampleLibrary.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameRunner/GameRunner.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameRunner/GameRunner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameState/BotData.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameState/BotData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameState/GameState.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameState/GameState.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Battlefield.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Battlefield.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/GameScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/GameScreen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/EntityFactory.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ViewObjects/EntityFactory.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,15 +71,15 @@
   </component>
   <component name="RunManager" selected="Python.GameRunner">
     <configuration name="GameRunner" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Pycraft" />
+      <module name="PyCraft" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\corey.roberts\AppData\Local\Programs\Python\Python36\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/GameRunner" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GameRunner/GameRunner.py" />
