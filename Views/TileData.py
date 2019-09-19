@@ -55,8 +55,8 @@ class TileData:
         text_color = (0, 0, 0)
         if self.selected_tile is None:
             text = "No Tiles Selected"
-        elif self.selected_tile.entity is not None:
-            text = self.selected_tile.entity.get_name()
+        elif self.selected_tile.unit is not None:
+            text = self.selected_tile.unit.get_name()
         else:
             text = self.selected_tile.terrain.get_name()
         return self.font.render(text, antialias, text_color, self.background_color)
@@ -66,8 +66,8 @@ class TileData:
         text_color = (0, 0, 0)
         if self.selected_tile is None:
             text = ""
-        elif self.selected_tile.entity is not None:
-            text = self.selected_tile.entity.get_status()
+        elif self.selected_tile.unit is not None:
+            text = self.selected_tile.unit.get_status()
         else:
             text = self.selected_tile.terrain.get_status()
         return self.font.render(text, antialias, text_color, self.background_color)

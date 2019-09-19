@@ -58,7 +58,7 @@ class GameRunner:
         self._gameState = GameState()
         self._gameState.terrain_map = self._mapFactory.generate_example_map()
 
-    # todo parse bots and bot_wrappers
+    # TODO parse bots and bot_wrappers
     def initialize_bots(self):
         self._gameState.add_bot(ExampleBot(0, self._gameLibrary))
         self._gameState.add_bot(ExampleBot(1, self._gameLibrary))
@@ -73,4 +73,4 @@ while True:
     gameRunner.run()
 pygame.quit
 
-# TODO pause option (don't run while paused)
+# TODO pause option (space to pause. only run user input and view rendering while paused)

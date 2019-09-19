@@ -1,8 +1,8 @@
 import pygame
-from .Entity import Entity
+from .Unit import Unit
 
 
-class Human(Entity):
+class Human(Unit):
     def __init__(self, status, background_color):
         super().__init__("Human", "H", status, self.generate_text_color(status), background_color)
 

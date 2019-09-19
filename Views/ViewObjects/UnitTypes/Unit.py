@@ -1,4 +1,4 @@
-class Entity(object):
+class Unit(object):
     # TODO proper properties
     _name = None
     _value = None

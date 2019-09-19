@@ -19,8 +19,8 @@ class Battlefield:
     # maybe various other helper functions
     terrain_map = None
     terrain_map_size = None
-    entity_map = None
-    entity_map_size = None
+    unit_map = None
+    unit_map_size = None
 
     tiles_horizontal = None
     tiles_vertical = None
@@ -33,7 +33,7 @@ class Battlefield:
     map_offset_horizontal = None
     map_offset_vertical = None
 
-    def __init__(self, rect: pygame.Rect, tile_size: int, terrain_map, entity_map, background_color: tuple):
+    def __init__(self, rect: pygame.Rect, tile_size: int, terrain_map, unit_map, background_color: tuple):
         self.rect = rect
         self.tile_size = tile_size  # Square tiles
         self.background_color = background_color  # This is applied to all screens and tiles to speed up blits
@@ -52,7 +52,7 @@ class Battlefield:
         self.initialize_fonts()
 
         self.set_terrain_map(terrain_map)
-        self.set_entity_map(entity_map)
+        self.set_unit_map(unit_map)
 
         self.generate_tiles()
 
@@ -65,12 +65,12 @@ class Battlefield:
         self.terrain_map = terrain_map
         self.terrain_map_size = (len(terrain_map), len(terrain_map[0]))
 
-    def set_entity_map(self, entity_map):
-        self.entity_map = entity_map
-        self.entity_map_size = (len(entity_map), len(entity_map[0]))
+    def set_unit_map(self, unit_map):
+        self.unit_map = unit_map
+        self.unit_map_size = (len(unit_map), len(unit_map[0]))
 
     def update(self, game_state):
-        self.update_entity_map(game_state)
+        self.update_unit_and_terrain(game_state)
         self.update_mouse_position()
         self.update_map_scroll()
         self.update_tiles()
@@ -100,20 +100,29 @@ class Battlefield:
 
                 tile = Tile(rect=Rect(tile_position[0], tile_position[1], self.tile_size, self.tile_size),
                             terrain=self.terrain_map[tile_x][tile_y],
-                            entity=self.entity_map[tile_x][tile_y],
+                            unit=self.unit_map[tile_x][tile_y],
                             font=self.font,
                             mouse_position=self.mouse_position)
                 row.append(tile)
             self.tiles.append(row)
 
-    def update_entity_map(self, game_state):
-        self.entity_map = game_state.generate_view_entity_map()
+    def update_unit_and_terrain(self, game_state):
+        self.unit_map = game_state.generate_view_unit_map()
+
+        for left in range(self.tiles_horizontal):
+            for top in range(self.tiles_vertical):
+                tile_x = self.map_offset_horizontal + left
+                tile_y = self.map_offset_vertical + top
+
+                self.tiles[left][top].unit = self.unit_map[tile_x][tile_y]
+                self.tiles[left][top].terrain = self.terrain_map[tile_x][tile_y]
 
     def update_tiles(self):
         if self.rewrite_all_tiles:
             self.generate_tiles()
             self.rewrite_all_tiles = False
         else:
+            # TODO replace this with a more calculated approach?
             for row in self.tiles:
                 for tile in row:
                     tile.mouse_position = self.mouse_position

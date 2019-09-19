@@ -35,14 +35,13 @@ class GameScreen:
         self._screen = pygame.display.set_mode(self._screen_rect.size, window_style, best_depth)
         self._screen.fill((0, 0, 0))
 
-    # TODO initialize battlefield with game_state terrain, and then combine all of the game_state bot entities into a map for entity_map
     def initialize_battlefield(self):
         rect = Rect(0, 0, int(self._screen_rect.width * 0.8), self._screen_rect.height)
         tile_size = 12
         background_color = (0, 0, 0)
         terrain_map = self._game_state._terrain_map
-        entity_map = self._game_state.generate_view_entity_map()
-        self._battlefield = Battlefield(rect, tile_size, terrain_map, entity_map, background_color)
+        unit_map = self._game_state.generate_view_unit_map()
+        self._battlefield = Battlefield(rect, tile_size, terrain_map, unit_map, background_color)
 
     def initialize_game_data(self, clock):
         rect = Rect(int(self._screen_rect.width * 0.8), 0,
@@ -57,9 +56,9 @@ class GameScreen:
         background_color = (240, 240, 240)
         self._tile_data = TileData(rect, background_color)
 
-    def update_maps(self, terrain_map, entity_map):
+    def update_maps(self, terrain_map, unit_map):
         self._battlefield.terrain_map = terrain_map
-        self._battlefield.entity_map = entity_map
+        self._battlefield.unit_map = unit_map
 
     def update(self):
         self._battlefield.update(self._game_state)

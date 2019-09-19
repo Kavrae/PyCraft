@@ -1,45 +1,52 @@
-from Views.ViewObjects import EntityFactory
+from Views.ViewObjects import UnitFactory
 from .BotData import BotData
-import random
 
 
 class GameState:
     def __init__(self):
         self._bots = []
+        self._units = []
+        self._terrain_map = None
 
     @property
     def bots(self): return self._bots
 
     @property
+    def units(self): return self._units
+
+    def add_unit(self, unit):
+        self._units.append(unit)
+
+    @property
     def terrain_map(self): return self._terrain_map
 
     @terrain_map.setter
-    def terrain_map(self, new_map):
-        self._terrain_map = new_map
+    def terrain_map(self, new_map): self._terrain_map = new_map
 
     def add_bot(self, bot):
-        self._bots.append(BotData(bot))
+        new_bot_data = BotData(bot)
+        self._bots.append(new_bot_data)
 
     def get_bot_data(self, bot_id):
         if len(self._bots) > bot_id:
             return self._bots[bot_id]
         return None
 
-    # TODO use actual coordinates, not random
+    def get_unit(self, unit_id):
+        if len(self._units) > unit_id:
+            return self._units[unit_id]
+        return None
+
     # TODO Move this to the map factory or view utility file?
-    def generate_view_entity_map(self):
-        entity_map = []
+    def generate_view_unit_map(self):
+        unit_map = []
         for x in range(0, len(self.terrain_map)):
             row = []
             for y in range(0, len(self.terrain_map[0])):
                 row.append(None)
-            entity_map.append(row)
+            unit_map.append(row)
 
-        for bot in self.bots:
-            for entity in bot.entities:
-                if entity.position is None:
-                    entity.position = (random.randint(0, len(self.terrain_map)), random.randint(0, len(self.terrain_map[0])))
-
-                # TODO Maybe switch this to a constructor instead
-                entity_map[entity.position[0]][entity.position[1]] = EntityFactory.library_entity_to_view_entity(entity)
-        return entity_map
+        # TODO index out of range exception
+        for unit in self._units:
+            unit_map[unit.location[0]][unit.location[1]] = UnitFactory.library_unit_to_view_unit(unit)
+        return unit_map

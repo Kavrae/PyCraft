@@ -9,7 +9,7 @@ class Tile:
     font = None
 
     terrain = None
-    entity = None
+    unit = None
     
     mouse_position = None
     background_color = None
@@ -17,33 +17,41 @@ class Tile:
     is_first_render = None
     is_selected = None
     is_changed = None
+    has_unit = None
 
-    def __init__(self, rect: Rect, terrain, entity, font, mouse_position: tuple, background_color: tuple = pygame.Color("black")):
+    # TODO set is_changed if the unit changes, not just the mouse
+    def __init__(self, rect: Rect, terrain, unit, font, mouse_position: tuple, background_color: tuple = pygame.Color("black")):
         self.rect = rect
         self.terrain = terrain
-        self.entity = entity
+        self.unit = unit
         self.font = font
         self.mouse_position = mouse_position
         self.background_color = background_color
 
         self.is_first_render = True
         self.is_selected = False
+        self.has_unit = False
         self.is_changed = True
 
         self.surface = pygame.Surface(self.rect.size)
         self.surface.fill(self.background_color)
 
     def update(self):
-        self.update_selected()
+        self.is_changed = False
+
+        self.update_has_unit()
+        self.update_is_selected()
 
     def render(self):
-        if self.is_changed:
+        if self.is_changed or self.is_first_render:
+            self.is_first_render = False
+
             # Reset Tile
             self.surface.fill(self.background_color)
 
             # Create Font surface
             antialias = True
-            printable = self.entity or self.terrain
+            printable = self.unit or self.terrain
             font_surface = self.font.render(printable.get_value(), antialias,
                                             printable.get_text_color(), printable.get_background_color())
             font_rect = font_surface.get_rect()
@@ -56,18 +64,20 @@ class Tile:
             if self.is_selected:
                 self.render_selected()
 
-    def update_selected(self):
-        # Skip all selection logic when first creating the tile
-        if self.is_first_render:
-            self.is_first_render = False
-            return
+    def update_has_unit(self):
+        if self.has_unit and self.unit is None:
+            self.has_unit = False
+            self.is_changed = True
+        elif not self.has_unit and self.unit is not None:
+            self.has_unit = True
+            self.is_changed = True
 
+    def update_is_selected(self):
         if self.mouse_position is not None:
             if self.rect.collidepoint(self.mouse_position[0], self.mouse_position[1]):
                 # Do not update tile if the mouse was hover over it and still is
                 if self.is_selected:
                     self.is_selected = True
-                    self.is_changed = False
                 # Update tile if the mouse is hovering over it and wasn't before
                 else:
                     self.is_selected = True
@@ -79,7 +89,6 @@ class Tile:
                     self.is_changed = True
                 # Do nothing if the tile wasn't selected and still isn't
                 else:
-                    self.is_changed = False
                     self.is_selected = False
 
     def render_selected(self):

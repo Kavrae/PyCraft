@@ -1,8 +1,8 @@
 import pygame
-from .Entity import Entity
+from .Unit import Unit
 
 
-class Orc(Entity):
+class Orc(Unit):
     def __init__(self, status, background_color):
         super().__init__("Orc", "O", status, self.generate_text_color(status), background_color)
 
