@@ -13,7 +13,7 @@ class Battlefield:
     tile_size = None
     tiles = None
 
-    # TODO change maps to a class
+    # TODO change maps to a numpy array (2d)
     # includes arrays of objects
     # includes map size
     # maybe various other helper functions

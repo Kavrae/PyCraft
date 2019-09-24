@@ -48,7 +48,7 @@ class GameRunner:
 
     def initialize_clock(self):
         self._clock = pygame.time.Clock()
-        self._fps = 60
+        self._fps = 180
 
     # TODO map seeds
     def initialize_map_factory(self):

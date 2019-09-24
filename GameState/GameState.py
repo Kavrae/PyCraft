@@ -1,4 +1,5 @@
 from .BotData import BotData
+import numpy
 
 
 class GameState:
@@ -6,6 +7,9 @@ class GameState:
         self._bots = []
         self._units = []
         self._terrain_map = None
+        self._unit_map = None
+
+        self._units_changed = True
 
     @property
     def bots(self): return self._bots
@@ -15,6 +19,7 @@ class GameState:
 
     def add_unit(self, unit):
         self._units.append(unit)
+        self._units_changed = True
 
     @property
     def terrain_map(self): return self._terrain_map
@@ -37,16 +42,12 @@ class GameState:
         return None
 
     # TODO Move this to the map factory or view utility file?
-    # TODO cache this and only rebuild it if something changes.
-    # OR manually move things around the map when they move/die/created?
+    # TODO manually move things around the map when they move/die/created?
     def generate_unit_map(self):
-        unit_map = []
-        for x in range(0, len(self.terrain_map)):
-            row = []
-            for y in range(0, len(self.terrain_map[0])):
-                row.append(None)
-            unit_map.append(row)
-
-        for unit in self._units:
-            unit_map[unit.location[0]][unit.location[1]] = unit
-        return unit_map
+        if self._units_changed:
+            print('rebuilding map')
+            self._unit_map = numpy.full([100, 100], fill_value=None)
+            for unit in self._units:
+                self._unit_map[unit.location[0], unit.location[1]] = unit
+        self._units_changed = False
+        return self._unit_map
