@@ -2,39 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54576268-5231-40c0-99df-7b90d79a3f11" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Human/Human.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Human/HumanWarrior.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Orc/Orc.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Orc/OrcWarrior.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Unit.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/UnitFactory.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Terrain/Grass.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Terrain/Terrain.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Terrain/Tree.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bots/BotTemplate.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bots/BotTemplate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bots/ExampleBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bots/ExampleBot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameLibrary/ExampleLibrary.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/ExampleLibrary.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Entities/Entity.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Entities/EntityFactory.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Entities/Human/Human.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Entities/Human/HumanWarrior.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Entities/Human/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Human/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Entities/Orc/Orc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Entities/Orc/OrcWarrior.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Entities/Orc/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Orc/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Entities/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Human/Human.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Human/Human.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Human/HumanWarrior.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Human/HumanWarrior.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Orc/Orc.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Orc/Orc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Orc/OrcWarrior.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Orc/OrcWarrior.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Unit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/UnitFactory.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/UnitFactory.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameRunner/GameRunner.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameRunner/GameRunner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameRunner/MapFactory.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameRunner/MapFactory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameState/BotData.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameState/BotData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameRunner/MapFactory.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/MapFactory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameRunner/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameRunner/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameState/GameState.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameState/GameState.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/Battlefield.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Battlefield.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/GameScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/GameScreen.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/TileData.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/TileData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/EntityFactory.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ViewObjects/UnitFactory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/Entity_Types/Entity.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ViewObjects/UnitTypes/Unit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/Entity_Types/Human.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ViewObjects/UnitTypes/Human.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/Entity_Types/Orc.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ViewObjects/UnitTypes/Orc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/Entity_Types/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ViewObjects/UnitTypes/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/Tile.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ViewObjects/Tile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/ViewObjects/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/TerrainFactory.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/Terrain_Types/Grass.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/Terrain_Types/Terrain.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/Terrain_Types/Tree.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/Terrain_Types/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/Tile.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Tile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/UnitFactory.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/UnitTypes/Human.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/UnitTypes/Orc.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/UnitTypes/Unit.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/UnitTypes/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/ViewObjects/__init__.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,10 +59,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\corey.roberts\Documents\git\PyCraft\Views" />
+      <recent name="C:\Users\corey.roberts\Documents\git\PyCraft\GameLibrary" />
       <recent name="C:\Users\corey.roberts\Documents\git\PyCraft\GameState" />
       <recent name="C:\Users\corey.roberts\Documents\git\PyCraft\Views\ViewObjects\Terrain_Types" />
       <recent name="C:\Users\corey.roberts\Documents\git\PyCraft\Views\ViewObjects\Entity_Types" />
-      <recent name="C:\Users\corey.roberts\Documents\git\PyCraft\Views\ViewObjects" />
     </key>
   </component>
   <component name="RunDashboard">

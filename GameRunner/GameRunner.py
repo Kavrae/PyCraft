@@ -2,9 +2,9 @@
 import pygame
 
 from Views import GameScreen
-from MapFactory import MapFactory  # Why is this angry? Confused. Doesn't work with .MapFactory like everything else
 from GameState.GameState import GameState
 from GameLibrary.ExampleLibrary import ExampleLibrary
+from GameLibrary.MapFactory import MapFactory
 from Bots.ExampleBot import ExampleBot  #  TODO figure out how to dynamically import all bots at runtime (do in _init__.py)
 
 

@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 
-from Views.ViewObjects import Tile
+from Views.Tile import Tile
 
 
 class Battlefield:
@@ -33,7 +33,7 @@ class Battlefield:
     map_offset_horizontal = None
     map_offset_vertical = None
 
-    def __init__(self, rect: pygame.Rect, tile_size: int, terrain_map, unit_map, background_color: tuple):
+    def __init__(self, rect: pygame.Rect, tile_size: int, terrain_map, unit_map, background_color):
         self.rect = rect
         self.tile_size = tile_size  # Square tiles
         self.background_color = background_color  # This is applied to all screens and tiles to speed up blits
@@ -102,12 +102,14 @@ class Battlefield:
                             terrain=self.terrain_map[tile_x][tile_y],
                             unit=self.unit_map[tile_x][tile_y],
                             font=self.font,
-                            mouse_position=self.mouse_position)
+                            mouse_position=self.mouse_position,
+                            background_color=self.background_color)
                 row.append(tile)
             self.tiles.append(row)
 
     def update_unit_and_terrain(self, game_state):
-        self.unit_map = game_state.generate_view_unit_map()
+        self.unit_map = game_state.generate_unit_map()
+        self.terrain_map = game_state.terrain_map
 
         for left in range(self.tiles_horizontal):
             for top in range(self.tiles_vertical):

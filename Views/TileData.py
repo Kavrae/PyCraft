@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from Views.ViewObjects import Tile
+from Views import Tile
 
 
 class TileData:
@@ -56,9 +56,9 @@ class TileData:
         if self.selected_tile is None:
             text = "No Tiles Selected"
         elif self.selected_tile.unit is not None:
-            text = self.selected_tile.unit.get_name()
+            text = self.selected_tile.unit.get_display_name()
         else:
-            text = self.selected_tile.terrain.get_name()
+            text = self.selected_tile.terrain._display_value
         return self.font.render(text, antialias, text_color, self.background_color)
 
     def display_tile_status(self):
@@ -67,7 +67,7 @@ class TileData:
         if self.selected_tile is None:
             text = ""
         elif self.selected_tile.unit is not None:
-            text = self.selected_tile.unit.get_status()
+            text = self.selected_tile.unit._status
         else:
-            text = self.selected_tile.terrain.get_status()
+            text = self.selected_tile.terrain._status
         return self.font.render(text, antialias, text_color, self.background_color)

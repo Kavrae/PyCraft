@@ -6,13 +6,20 @@ class Unit:
     _status = None
     _location = None
 
-    def __init__(self, unit_id, owner_id, race, unit_type, status, location):
+    _display_value = None
+    _text_color = None
+    _background_color = None
+
+    def __init__(self, unit_id, owner_id, race, unit_type, status, location, display_value, text_color, background_color):
         self._unit_id = unit_id
         self._owner_id = owner_id
         self._race = race
         self._unit_type = unit_type
         self._status = status
         self._location = location
+        self._display_value = display_value
+        self._text_color = text_color
+        self._background_color = background_color
 
     # TODO get all of these properties organized
     @property
@@ -25,3 +32,6 @@ class Unit:
             self._location = value
         else:
             raise TypeError("Position must be a tuple of two integers")
+
+    def get_display_name(self):
+        return self._race + " " + self._unit_type

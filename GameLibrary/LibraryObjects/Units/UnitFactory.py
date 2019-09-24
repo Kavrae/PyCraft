@@ -15,11 +15,11 @@ class UnitFactory:
 
         if race == "Human":
             if unit_type == "Warrior":
-                return HumanWarrior(owner_id, unit_id, status, location)
+                return HumanWarrior(owner_id, unit_id, status, location, (0, 0, 0))
             elif unit_type == "Cleric":
                 pass
         elif race == "Orc":
             if unit_type == "Warrior":
-                return OrcWarrior(owner_id, unit_id, status, location)
+                return OrcWarrior(owner_id, unit_id, status, location, (0, 0, 0))
             elif unit_type == "Shaman":
                 pass

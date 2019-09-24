@@ -1,4 +1,3 @@
-from Views.ViewObjects import UnitFactory
 from .BotData import BotData
 
 
@@ -38,7 +37,9 @@ class GameState:
         return None
 
     # TODO Move this to the map factory or view utility file?
-    def generate_view_unit_map(self):
+    # TODO cache this and only rebuild it if something changes.
+    # OR manually move things around the map when they move/die/created?
+    def generate_unit_map(self):
         unit_map = []
         for x in range(0, len(self.terrain_map)):
             row = []
@@ -46,7 +47,6 @@ class GameState:
                 row.append(None)
             unit_map.append(row)
 
-        # TODO index out of range exception
         for unit in self._units:
-            unit_map[unit.location[0]][unit.location[1]] = UnitFactory.library_unit_to_view_unit(unit)
+            unit_map[unit.location[0]][unit.location[1]] = unit
         return unit_map
