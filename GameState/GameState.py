@@ -45,9 +45,8 @@ class GameState:
     # TODO manually move things around the map when they move/die/created?
     def generate_unit_map(self):
         if self._units_changed:
-            print('rebuilding map')
             self._unit_map = numpy.full([100, 100], fill_value=None)
             for unit in self._units:
                 self._unit_map[unit.location[0], unit.location[1]] = unit
-        self._units_changed = False
+            self._units_changed = False
         return self._unit_map

@@ -17,9 +17,12 @@ class ExampleLibrary:
         terrain_map = self._game_state.terrain_map
         return len(terrain_map), len(terrain_map[0])
 
+    # TODO this is just an example method. It needs many more checks and exceptions
     def summon(self, bot_id, unit_type, location):
         bot_data = self._game_state.get_bot_data(bot_id)
 
         if bot_data.mana > 0:
             bot_data.mana -= 1
-            self._game_state.add_unit(self._unit_factory.create_new_unit(bot_id, bot_data.race, unit_type, "Alive", location))
+            return self._game_state.add_unit(self._unit_factory.create_new_unit(bot_id, bot_data.race, unit_type, location))
+        else:
+            raise Exception('You lose - You don''t have enough mana to do a summon')

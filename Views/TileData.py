@@ -28,8 +28,7 @@ class TileData:
         pass
 
     def render(self):
-        self.display_data_rows([self.display_tile_name(),
-                                self.display_tile_status()])
+        self.display_data_rows([self.display_tile_name()])
 
     def set_selected_tile(self, tile):
         self.selected_tile = tile
@@ -59,15 +58,4 @@ class TileData:
             text = self.selected_tile.unit.get_display_name()
         else:
             text = self.selected_tile.terrain._display_value
-        return self.font.render(text, antialias, text_color, self.background_color)
-
-    def display_tile_status(self):
-        antialias = True
-        text_color = (0, 0, 0)
-        if self.selected_tile is None:
-            text = ""
-        elif self.selected_tile.unit is not None:
-            text = self.selected_tile.unit._status
-        else:
-            text = self.selected_tile.terrain._status
         return self.font.render(text, antialias, text_color, self.background_color)
