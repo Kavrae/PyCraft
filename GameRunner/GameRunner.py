@@ -20,10 +20,14 @@ class GameRunner:
     _clock = None
     _fps = None
 
+    _paused = None
+
     def __init__(self):
         pygame.init()
         pygame.mixer = None  # handles sound
         pygame.display.set_caption('PyCraft')
+
+        self._paused = False
 
         self.initialize_clock()
         self.initialize_map_factory()
@@ -34,17 +38,16 @@ class GameRunner:
         self._gameScreen = GameScreen(self._clock, self._gameState)
 
     def run(self):
-        # TODO got input parsing
-        for bot_data in self._gameState.bots:
-            bot_data.bot.run()
-        # TODO game engine's "turn" (resource growth, wild animals, natural events, etc)
-        self.clock_tick()
+        self.get_user_input()
+
+        if not self._paused:
+            self.run_status_effects()
+            self.run_bots()
+            # TODO game engine's "turn" (resource growth, wild animals, natural events, etc)
+            self.clock_tick()
+
         self._gameScreen.update()
         self._gameScreen.render()
-
-        # Hack - prevent windows "not responding" timeouts
-        # TODO move this when I start to handle user events, such as using menus (if any)
-        pygame.event.get()
 
     def initialize_clock(self):
         self._clock = pygame.time.Clock()
@@ -66,11 +69,27 @@ class GameRunner:
     def clock_tick(self):
         self._clock.tick(self._fps)
 
+    def get_user_input(self):
+        for event in pygame.event.get():
+            # Pause Button (spacebar)
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                self._paused = not self._paused
+
+            # Graceful program close
+            elif event.type == pygame.QUIT:
+                raise SystemExit
+
+    def run_status_effects(self):
+        for unit in self._gameState.units:
+            for status_effect in unit._status_effects:
+                status_effect.run()
+
+    def run_bots(self):
+        for bot_data in self._gameState.bots:
+            bot_data.bot.run()
+
 
 # TODO error handling wrapper
 gameRunner = GameRunner()
 while True:
     gameRunner.run()
-pygame.quit
-
-# TODO pause option (space to pause. only run user input and view rendering while paused)

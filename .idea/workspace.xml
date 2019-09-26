@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54576268-5231-40c0-99df-7b90d79a3f11" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/StatusEffects/Poisoned.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/StatusEffects/StatusEffect.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/StatusEffects/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameLibrary/ExampleLibrary.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/ExampleLibrary.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Human/Human.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Human/Human.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Human/HumanWarrior.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Human/HumanWarrior.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Orc/Orc.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Orc/Orc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Orc/OrcWarrior.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Orc/OrcWarrior.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/Unit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/UnitFactory.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameLibrary/LibraryObjects/Units/UnitFactory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameState/GameState.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameState/GameState.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/TileData.py" beforeDir="false" afterPath="$PROJECT_DIR$/Views/TileData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameRunner/GameRunner.py" beforeDir="false" afterPath="$PROJECT_DIR$/GameRunner/GameRunner.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
